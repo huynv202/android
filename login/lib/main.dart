@@ -8,12 +8,15 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
+
 String username = '';
 String password = '';
+
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
           padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -31,7 +34,8 @@ class _MyAppState extends State<MyApp> {
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Color(0xffd8d8d8)),
-                    child: FlutterLogo()),
+                    child: Image.network(
+                        "https://cdn.pixabay.com/photo/2017/12/13/23/27/no-background-3017971_960_720.png")),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
@@ -46,7 +50,7 @@ class _MyAppState extends State<MyApp> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                child: TextField (
+                child: TextField(
                   onChanged: (text) {
                     username = text;
                   },
@@ -58,14 +62,13 @@ class _MyAppState extends State<MyApp> {
                         TextStyle(color: Color(0xffd8d8d8), fontSize: 15),
                   ),
                 ),
-
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                 child: Stack(
                   alignment: AlignmentDirectional.centerEnd,
                   children: <Widget>[
-                    TextField (
+                    TextField(
                       // controller: TextEditingController(text: password),
                       onChanged: (text) {
                         password = text;
@@ -76,16 +79,20 @@ class _MyAppState extends State<MyApp> {
                         labelText: 'PASSWORD',
                         icon: Icon(Icons.lock),
                         labelStyle:
-                        TextStyle(color: Color(0xffd8d8d8), fontSize: 15),
+                            TextStyle(color: Color(0xffd8d8d8), fontSize: 15),
                       ),
                     ),
-                    Text(
-                      "SHOW",
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold),
-                    )
+                    ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.white, textStyle: TextStyle()),
+                        child: Text(
+                          "SHOW",
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold),
+                        ))
                   ],
                 ),
               ),
@@ -96,17 +103,17 @@ class _MyAppState extends State<MyApp> {
                   height: 56,
                   child: ElevatedButton(
                       style: TextButton.styleFrom(
-                         primary: Colors.red,
-                        backgroundColor: Colors.blueAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8))
-                        )
-                      ),
+                          primary: Colors.red,
+                          backgroundColor: Colors.blueAccent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)))),
                       onPressed: onSignInClicked,
-                      child: Text("SIGN IN",style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                      ),)),
+                      child: Text(
+                        "SIGN IN",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      )),
                 ),
               )
             ],
@@ -115,9 +122,8 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-  void onSignInClicked(){
-    print("User : "+username+"\nPassword : "+password);
 
+  void onSignInClicked() {
+    print("User : " + username + "\nPassword : " + password);
   }
 }
-
