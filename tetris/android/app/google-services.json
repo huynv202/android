@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "495314657255",
+    "project_id": "terrisgame-386ef",
+    "storage_bucket": "terrisgame-386ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495314657255:android:f609e90ea815a65f2da742",
+        "android_client_info": {
+          "package_name": "com.example.tetris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495314657255-5fpqf1orosa5rr2cei74hnsnuuitjgk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR_Co0NIhSARyn2HIkgccGCp6cXqbDx6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495314657255-5fpqf1orosa5rr2cei74hnsnuuitjgk8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

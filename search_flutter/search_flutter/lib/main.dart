@@ -471,7 +471,7 @@ class _SearchPageState extends State<SearchPage> {
 }
 
 List<FavoriteList> abc = [];
-List<String> ab = [];
+// List<String> ab = [];
 
 class MovieDetails extends StatefulWidget {
   final MovieModel movie;
