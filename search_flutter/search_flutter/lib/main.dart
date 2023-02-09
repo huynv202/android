@@ -44,6 +44,12 @@ class _SearchPageState extends State<SearchPage> {
             'https://www.themoviedb.org/t/p/original/ecBRkXerAZqRRUfR8Lt3L3Dh6J5.jpg',
         rating: 9.0),
     MovieModel(
+        movie_title: 'The Godfather: Part II',
+        movie_release_year: 1974,
+        movie_poster_url:
+            'https://www.themoviedb.org/t/p/original/ecBRkXerAZqRRUfR8Lt3L3Dh6J5.jpg',
+        rating: 6.0),
+    MovieModel(
         movie_title: 'The Shawshank Redemption',
         movie_release_year: 1994,
         movie_poster_url:
@@ -154,11 +160,174 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 60, 20, 109),
+                image: DecorationImage(
+                  image: AssetImage('assets/cooltext429253779126071.png'),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              child: Text(''),
+            ),
+            ListTile(
+              title: const Text(
+                'Home',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.home,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Shorts',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.video_collection,
+                color: Colors.red,
+              ),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Favorite',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.favorite,
+                color: Colors.red,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FavoriteScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Explore',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.explore,
+                color: Colors.green,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ExploreScreen()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'Seen',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.send_time_extension,
+                color: Colors.red,
+              ),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'News',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.newspaper,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NewsScreen()),
+                );
+              },
+            ),
+            ListTile(
+                title: const Text(
+                  'Help',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.help,
+                  color: Colors.brown,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HelpScreen()),
+                  );
+                }),
+          ],
+        ),
+      ),
       backgroundColor: const Color.fromARGB(255, 85, 10, 99),
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.home),
+        leading: Builder(
+          builder: (context) => IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: const Icon(Icons.menu),
+          ),
         ),
         actions: [
           IconButton(
@@ -169,10 +338,6 @@ class _SearchPageState extends State<SearchPage> {
                         builder: (context) => const FavoriteScreen()));
               },
               icon: const Icon(Icons.favorite_border_sharp)),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.settings),
-          ),
         ],
         backgroundColor: const Color.fromARGB(255, 20, 1, 24),
         title: const Text(
@@ -182,7 +347,7 @@ class _SearchPageState extends State<SearchPage> {
         elevation: 0.0,
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,32 +423,45 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                           )),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 5.0, right: 10.0, left: 10.0, bottom: 1.0),
-              child: SizedBox(
-                height: 50,
-                width: double.maxFinite,
-                child: MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      if (a < display_list.length) {
-                        a = a + 5;
-                        if (a > display_list.length) {
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // FloatingActionButton(
+                //   onPressed: () {
+                //     setState(() {
+                //       display_list = main_movies_list
+                //           .where((element) => element.rating! > 9)
+                //           .toList();
+                //     });
+                //   },
+                //   child: const Icon(Icons.filter_list),
+                // ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        if (a < display_list.length) {
+                          a = a + 5;
+                          if (a > display_list.length) {
+                            a = display_list.length;
+                          }
+                        } else if (a >= display_list.length) {
                           a = display_list.length;
+                          return;
                         }
-                      } else if (a >= display_list.length) {
-                        a = display_list.length;
-                        return;
-                      }
-                    });
-                  },
-                  child: Text(
-                    "Load more :$a movies",
-                    style: const TextStyle(color: Colors.white70),
+                      });
+                    },
+                    child: const Icon(
+                      Icons.arrow_drop_down_circle_outlined,
+                      color: Colors.white,
+                      size: 50,
+                    ),
                   ),
                 ),
-              ),
+              ],
             )
           ],
         ),
@@ -297,10 +475,8 @@ List<String> ab = [];
 
 class MovieDetails extends StatefulWidget {
   final MovieModel movie;
-  // ignore: non_constant_identifier_names
-  // final List<String> favorite_list = [];
 
-  MovieDetails({Key? key, required this.movie}) : super(key: key);
+  const MovieDetails({Key? key, required this.movie}) : super(key: key);
 
   @override
   State<MovieDetails> createState() => _MovieDetailsState();
@@ -323,13 +499,7 @@ class _MovieDetailsState extends State<MovieDetails> {
       confirmBtnColor: Colors.green,
       confirmBtnText: "Yes",
       cancelBtnText: "No",
-    )
-
-        //show success if confirm
-
-        //show error if cancel
-
-        ;
+    );
   }
 
   void showAlertSuccess() {
@@ -578,6 +748,224 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             trailing: Text(abc[index].rating!),
           );
         },
+      ),
+    );
+  }
+}
+
+class ShortsScreen extends StatelessWidget {
+  const ShortsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Shorts'),
+      ),
+      body: const Center(
+        child: Text('Shorts'),
+      ),
+    );
+  }
+}
+
+class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({super.key});
+  @override
+  State<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
+  // ignore: non_constant_identifier_names
+  static List<MovieModel> main_movies_list = [
+    MovieModel(
+        movie_title: 'The Godfather: Part II',
+        movie_release_year: 1974,
+        movie_poster_url:
+            'https://www.themoviedb.org/t/p/original/ecBRkXerAZqRRUfR8Lt3L3Dh6J5.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Godfather: Part II',
+        movie_release_year: 1974,
+        movie_poster_url:
+            'https://www.themoviedb.org/t/p/original/ecBRkXerAZqRRUfR8Lt3L3Dh6J5.jpg',
+        rating: 6.0),
+    MovieModel(
+        movie_title: 'The Shawshank Redemption',
+        movie_release_year: 1994,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1mWWMXuGSBuNjSspbq6AiipXaH/The-Shawshank-Redemption-Retro-Vintage-Classic-Movie-Poster-Canvas-Painting-Wall-Sticker-Home-Art-Home-Decoration.jpg',
+        rating: 9.3),
+    MovieModel(
+        movie_title: 'The Godfather',
+        movie_release_year: 1972,
+        movie_poster_url:
+            'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+        rating: 9.2),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'The Dark Knight',
+        movie_release_year: 2008,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1Umy6OFXXXXaaXVXXq6xXFXXXy/07-Batman-The-Dark-Knight-Rises-Legend-Ends-Movie-14-x18-Poster.jpg',
+        rating: 9.0),
+    MovieModel(
+        movie_title: 'Công chúa Jasmine',
+        movie_release_year: 1994,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1mWWMXuGSBuNjSspbq6AiipXaH/The-Shawshank-Redemption-Retro-Vintage-Classic-Movie-Poster-Canvas-Painting-Wall-Sticker-Home-Art-Home-Decoration.jpg',
+        rating: 9.3),
+    MovieModel(
+        movie_title: 'The Shawshank Redemption',
+        movie_release_year: 1994,
+        movie_poster_url:
+            'https://ae01.alicdn.com/kf/HTB1mWWMXuGSBuNjSspbq6AiipXaH/The-Shawshank-Redemption-Retro-Vintage-Classic-Movie-Poster-Canvas-Painting-Wall-Sticker-Home-Art-Home-Decoration.jpg',
+        rating: 9.3),
+  ];
+
+  // ignore: non_constant_identifier_names
+  List<MovieModel> display_list = List.from(main_movies_list);
+
+  @override
+  void initState() {
+    display_list =
+        main_movies_list.where((element) => element.rating! > 9).toList();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 29, 66, 30),
+      appBar: AppBar(
+        title: const Text('Explore'),
+        backgroundColor: Colors.green,
+      ),
+      body:
+          //show display_list with rating >9
+          ListView.builder(
+        itemCount: display_list.length,
+        itemBuilder: (context, index) {
+          return Card(
+            color: const Color.fromARGB(255, 7, 49, 8),
+            semanticContainer: true,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            elevation: 5,
+            margin: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Image.network(
+                      display_list[index].movie_poster_url.toString()),
+                  title: Text(
+                    display_list[index].movie_title.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  subtitle: Text(
+                      display_list[index].movie_release_year.toString(),
+                      style: const TextStyle(color: Colors.white)),
+                  trailing: Text(display_list[index].rating.toString(),
+                      style: const TextStyle(color: Colors.white)),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+      //add a floating action button to filter the list
+    );
+  }
+}
+
+class NewsScreen extends StatelessWidget {
+  const NewsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('News'),
+      ),
+      body: const Center(
+        child: Text('News'),
+      ),
+    );
+  }
+}
+
+class HelpScreen extends StatelessWidget {
+  const HelpScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Help'),
+      ),
+      body: const Center(
+        child: Text('Help'),
       ),
     );
   }
